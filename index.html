@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symphony Vocabulary Learning - Login</title>
+    <title>Symphony Vocabulary Learning - AI-Enhanced Education</title>
     <style>
         * {
             margin: 0;
@@ -12,176 +12,483 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite;
+        }
+        
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+        
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            right: 15%;
+            top: 60%;
+            animation-delay: 2s;
+        }
+        
+        .circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 50%;
+            top: 10%;
+            animation-delay: 4s;
+        }
+        
+        .circle:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            right: 40%;
+            bottom: 15%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-50px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+        
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 90%;
-            max-width: 400px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Left Side - Branding */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
         
         .logo {
-            text-align: center;
-            margin-bottom: 30px;
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
         }
         
-        .logo h1 {
-            color: #667eea;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .features {
+            margin-top: 40px;
+            text-align: left;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .feature-item .icon {
+            font-size: 28px;
+            margin-right: 15px;
+        }
+        
+        .research-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Right Side - Login Form */
+        .login-section {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
             font-size: 32px;
+            color: #333;
             margin-bottom: 10px;
         }
         
-        .logo p {
+        .login-header p {
             color: #666;
-            font-size: 14px;
+            font-size: 16px;
         }
         
         .role-selector {
-            display: flex;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 30px;
         }
         
         .role-btn {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #ddd;
+            padding: 20px;
+            border: 3px solid #e0e0e0;
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 16px;
             transition: all 0.3s;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .role-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
         }
         
         .role-btn.active {
             border-color: #667eea;
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .role-btn .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 8px;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 15px;
         }
         
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: all 0.3s;
+            font-family: inherit;
         }
         
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
         
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
         
         .login-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
         }
         
-        .demo-accounts {
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .demo-info {
             margin-top: 30px;
-            padding: 20px;
+            padding: 25px;
             background: #f8f9fa;
-            border-radius: 10px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
         }
         
-        .demo-accounts h3 {
+        .demo-info h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .demo-info p {
             font-size: 14px;
             color: #666;
-            margin-bottom: 10px;
+            line-height: 1.8;
+            margin-bottom: 8px;
         }
         
-        .demo-accounts p {
-            font-size: 12px;
-            color: #999;
-            line-height: 1.6;
+        .demo-info strong {
+            color: #333;
         }
         
-        .demo-accounts strong {
-            color: #667eea;
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .hero-section {
+                padding: 40px;
+            }
+            
+            .hero-section h1 {
+                font-size: 32px;
+            }
+            
+            .features {
+                display: none;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading.active {
+            display: flex;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <div class="logo">
-        <h1>📚 Symphony Vocab</h1>
-        <p>AI-Enhanced Vocabulary Learning</p>
-        <p style="font-size: 12px; color: #999; margin-top: 5px;">Grade 4 | Research Study Version</p>
-    </div>
+<!-- Animated Background -->
+<div class="bg-animation">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+
+<!-- Loading Screen -->
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
     
-    <div class="role-selector">
-        <button class="role-btn active" id="studentBtn" onclick="selectRole('student')">
-            👨‍🎓 Student
-        </button>
-        <button class="role-btn" id="teacherBtn" onclick="selectRole('teacher')">
-            👨‍🏫 Teacher/Admin
-        </button>
-    </div>
-    
-    <form id="loginForm" onsubmit="login(event)">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" required placeholder="Enter your username">
-        </div>
-        
-        <div class="form-group" id="passwordGroup">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter password (admin only)">
-        </div>
-        
-        <button type="submit" class="login-btn">Login</button>
-    </form>
-    
-    <div class="demo-accounts">
-        <h3>🎯 Demo Accounts (For Testing)</h3>
-        <p>
-            <strong>Students:</strong> student1, student2, student3 (no password)<br>
-            <strong>Teacher/Admin:</strong> admin (password: admin123)
+    <!-- Left Side: Hero/Branding -->
+    <div class="hero-section">
+        <div class="logo">📚</div>
+        <h1>Symphony Vocabulary</h1>
+        <p class="subtitle">
+            AI-Enhanced Gamified Learning<br>
+            Grade 4 | Research-Based Design
         </p>
+        
+        <div class="features">
+            <div class="feature-item">
+                <span class="icon">🤖</span>
+                <span>Adaptive AI scaffolding (ZPD)</span>
+            </div>
+            <div class="feature-item">
+                <span class="icon">🎮</span>
+                <span>Engaging gamification (SDT)</span>
+            </div>
+            <div class="feature-item">
+                <span class="icon">📊</span>
+                <span>Real-time progress tracking</span>
+            </div>
+            <div class="feature-item">
+                <span class="icon">🎯</span>
+                <span>Personalized learning paths</span>
+            </div>
+        </div>
+        
+        <div class="research-badge">
+            🔬 Design-Based Research Study
+        </div>
     </div>
+    
+    <!-- Right Side: Login Form -->
+    <div class="login-section">
+        <div class="login-header">
+            <h2>Welcome! 👋</h2>
+            <p>Choose your role to get started</p>
+        </div>
+        
+        <div class="role-selector">
+            <button class="role-btn active" id="studentBtn" onclick="selectRole('student')">
+                <span class="icon">👨‍🎓</span>
+                <span>Student</span>
+            </button>
+            <button class="role-btn" id="teacherBtn" onclick="selectRole('teacher')">
+                <span class="icon">👨‍🏫</span>
+                <span>Teacher/Admin</span>
+            </button>
+        </div>
+        
+        <form id="loginForm" onsubmit="login(event)">
+            <div class="form-group">
+                <label for="username">
+                    <span id="usernameLabel">Student Name</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    required 
+                    placeholder="Enter your name"
+                    autocomplete="off"
+                >
+            </div>
+            
+            <div class="form-group" id="passwordGroup" style="display: none;">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Enter admin password"
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button type="submit" class="login-btn" id="loginBtn">
+                Start Learning →
+            </button>
+        </form>
+        
+        <div class="demo-info">
+            <h4>🎯 Quick Start Guide</h4>
+            <p><strong>Students:</strong> Just enter your name (e.g., "Sita", "Ram", "Maya")</p>
+            <p><strong>Teachers:</strong> Username: <strong>admin</strong> | Password: <strong>admin123</strong></p>
+            <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                💾 Your progress saves automatically • 🔒 Data stored locally
+            </p>
+        </div>
+    </div>
+    
 </div>
 
 <script>
+// =============================================================================
 // AUTHENTICATION SYSTEM
+// Theory: User management for research data collection
+// =============================================================================
+
 let currentRole = 'student';
 
 function selectRole(role) {
     currentRole = role;
     
+    // Update button states
     document.getElementById('studentBtn').classList.remove('active');
     document.getElementById('teacherBtn').classList.remove('active');
     
@@ -189,10 +496,16 @@ function selectRole(role) {
         document.getElementById('studentBtn').classList.add('active');
         document.getElementById('passwordGroup').style.display = 'none';
         document.getElementById('password').required = false;
+        document.getElementById('usernameLabel').textContent = 'Student Name';
+        document.getElementById('username').placeholder = 'Enter your name';
+        document.getElementById('loginBtn').textContent = 'Start Learning →';
     } else {
         document.getElementById('teacherBtn').classList.add('active');
         document.getElementById('passwordGroup').style.display = 'block';
         document.getElementById('password').required = true;
+        document.getElementById('usernameLabel').textContent = 'Admin Username';
+        document.getElementById('username').placeholder = 'Enter username';
+        document.getElementById('loginBtn').textContent = 'Admin Login →';
     }
 }
 
@@ -202,65 +515,157 @@ function login(event) {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
     
-    if (currentRole === 'student') {
-        // Student login (no password required)
-        if (username) {
-            // Create or load student account
+    // Show loading
+    document.getElementById('loading').classList.add('active');
+    
+    setTimeout(() => {
+        if (currentRole === 'student') {
             loginStudent(username);
-        }
-    } else {
-        // Admin login (password required)
-        if (username === 'admin' && password === 'admin123') {
-            loginAdmin();
         } else {
-            alert('Invalid admin credentials!');
+            loginAdmin(username, password);
         }
-    }
+    }, 500);
 }
 
 function loginStudent(username) {
-    // Load or create student profile
-    let students = JSON.parse(localStorage.getItem('students') || '{}');
+    if (!username) {
+        alert('Please enter your name!');
+        document.getElementById('loading').classList.remove('active');
+        return;
+    }
+    
+    // Load or create student account
+    let students = JSON.parse(localStorage.getItem('symphonyStudents') || '{}');
     
     if (!students[username]) {
-        // New student - create account
+        // NEW STUDENT - Create account
         students[username] = {
             username: username,
-            created: new Date().toISOString(),
+            createdDate: new Date().toISOString(),
+            
+            // GAMIFICATION (SDT Competence)
             wordsLearned: 0,
             wordsMastered: 0,
             points: 0,
             level: 1,
             streak: 0,
             badges: [],
-            progress: {},
+            
+            // LEARNING PROGRESS
+            currentUnit: 1,
+            unitsCompleted: [],
+            wordProgress: {}, // { wordId: { attempts: [], mastered: false, lastReview: timestamp } }
+            
+            // RESEARCH DATA
             sessions: [],
-            lastLogin: new Date().toISOString()
+            totalTimeMinutes: 0,
+            lastLogin: new Date().toISOString(),
+            
+            // SDT NEED SATISFACTION (collected via surveys)
+            sdtScores: [],
+            
+            // ZPD TRACKING
+            currentDifficulty: 2.0, // Start at Grade 4 level
+            scaffoldingHistory: []
         };
-        localStorage.setItem('students', JSON.stringify(students));
+        
+        // RESEARCH LOG: New student created
+        logResearchEvent('student_created', {
+            username: username,
+            timestamp: new Date().toISOString()
+        });
     } else {
-        // Existing student - update last login
+        // EXISTING STUDENT - Update last login
         students[username].lastLogin = new Date().toISOString();
-        localStorage.setItem('students', JSON.stringify(students));
+        
+        // Update streak
+        updateStreak(students[username]);
     }
     
-    // Set current user
-    localStorage.setItem('currentUser', username);
-    localStorage.setItem('userRole', 'student');
+    // Save student data
+    localStorage.setItem('symphonyStudents', JSON.stringify(students));
+    
+    // Set current session
+    localStorage.setItem('symphonyCurrentUser', username);
+    localStorage.setItem('symphonyUserRole', 'student');
+    
+    // Start new session
+    startSession(students[username]);
     
     // Redirect to student dashboard
     window.location.href = 'student-dashboard.html';
 }
 
-function loginAdmin() {
-    localStorage.setItem('currentUser', 'admin');
-    localStorage.setItem('userRole', 'admin');
-    window.location.href = 'admin-dashboard.html';
+function loginAdmin(username, password) {
+    // Simple authentication (in production, use proper auth system)
+    if (username === 'admin' && password === 'admin123') {
+        localStorage.setItem('symphonyCurrentUser', 'admin');
+        localStorage.setItem('symphonyUserRole', 'admin');
+        
+        // RESEARCH LOG: Admin login
+        logResearchEvent('admin_login', {
+            timestamp: new Date().toISOString()
+        });
+        
+        window.location.href = 'admin-dashboard.html';
+    } else {
+        document.getElementById('loading').classList.remove('active');
+        alert('Invalid admin credentials!\n\nUsername: admin\nPassword: admin123');
+    }
 }
 
-// Initialize - hide password for students by default
-document.getElementById('passwordGroup').style.display = 'none';
-document.getElementById('password').required = false;
+function updateStreak(student) {
+    const today = new Date().toDateString();
+    const lastLogin = new Date(student.lastLogin).toDateString();
+    
+    if (lastLogin === today) {
+        // Already logged in today
+        return;
+    }
+    
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toDateString();
+    
+    if (lastLogin === yesterdayStr) {
+        // Consecutive day - increase streak
+        student.streak = (student.streak || 0) + 1;
+    } else {
+        // Streak broken - reset
+        student.streak = 1;
+    }
+}
+
+function startSession(student) {
+    const session = {
+        sessionId: 'session_' + Date.now(),
+        startTime: new Date().toISOString(),
+        endTime: null,
+        wordsAttempted: [],
+        wordsLearned: 0,
+        totalAttempts: 0,
+        correctAttempts: 0,
+        scaffoldingUsed: {},
+        choicesMade: {}
+    };
+    
+    localStorage.setItem('symphonyCurrentSession', JSON.stringify(session));
+}
+
+function logResearchEvent(eventType, data) {
+    let researchLog = JSON.parse(localStorage.getItem('symphonyResearchLog') || '[]');
+    
+    researchLog.push({
+        eventType: eventType,
+        data: data,
+        timestamp: new Date().toISOString()
+    });
+    
+    localStorage.setItem('symphonyResearchLog', JSON.stringify(researchLog));
+}
+
+// Initialize
+document.getElementById('username').focus();
 </script>
 
 </body>
