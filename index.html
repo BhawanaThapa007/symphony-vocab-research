@@ -280,15 +280,25 @@ function loginAdmin(event) {
     event.preventDefault();
     const username = document.getElementById('adminUsername').value.trim();
     const password = document.getElementById('adminPassword').value;
+    
+    // Wait for scripts to load
+    if (typeof window.AUTH === 'undefined') {
+        alert('System is still loading. Please wait a moment and try again.');
+        return;
+    }
+    
     try {
         const success = window.AUTH.loginAdmin(username, password);
         if (success) {
-            window.location.href = 'admin-dashboard.html';
+            setTimeout(() => {
+                window.location.href = 'admin-dashboard.html';
+            }, 100);
         } else {
             alert('Invalid credentials! Default is:\nUsername: admin\nPassword: admin123');
         }
     } catch (error) {
         alert('Login error: ' + error.message);
+        console.error('Admin login error:', error);
     }
 }
 </script>
