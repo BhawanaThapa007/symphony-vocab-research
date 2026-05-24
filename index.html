@@ -256,11 +256,23 @@ function loginStudent(event) {
         alert('Please enter your name!');
         return;
     }
+    
+    // Wait for scripts to load
+    if (typeof window.AUTH === 'undefined') {
+        alert('System is still loading. Please wait a moment and try again.');
+        return;
+    }
+    
     try {
         window.AUTH.loginStudent(name);
-        window.location.href = 'student-dashboard.html';
+        
+        // Delay redirect slightly to ensure data is saved
+        setTimeout(() => {
+            window.location.href = 'student-dashboard.html';
+        }, 100);
     } catch (error) {
         alert('Login error: ' + error.message);
+        console.error('Login error:', error);
     }
 }
 
