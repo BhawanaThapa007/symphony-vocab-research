@@ -399,7 +399,98 @@ function loginAdmin(event) {
         alert('Login error: ' + error.message);
     }
 }
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+function selectRole(role) {
+    document.getElementById('roleSelection').style.display = 'none';
+    if (role === 'student') {
+        document.getElementById('studentForm').classList.add('active');
+        setTimeout(() => document.getElementById('studentName').focus(), 100);
+    } else {
+        document.getElementById('adminForm').classList.add('active');
+        setTimeout(() => document.getElementById('adminUsername').focus(), 100);
+    }
+}
+
+function backToRoleSelection() {
+    document.getElementById('roleSelection').style.display = 'block';
+    document.getElementById('studentForm').classList.remove('active');
+    document.getElementById('adminForm').classList.remove('active');
+}
+
+function loginStudent(event) {
+    event.preventDefault();
+    
+    const nameInput = document.getElementById('studentName');
+    const name = nameInput.value.trim();
+    
+    if (!name) {
+        alert('Please enter your name!');
+        return;
+    }
+    
+    // Wait for AUTH to be available
+    if (typeof window.AUTH === 'undefined' || typeof window.SYMPHONY_CONFIG === 'undefined') {
+        alert('System is still loading. Please wait a moment and try again.');
+        setTimeout(() => location.reload(), 1000);
+        return;
+    }
+    
+    try {
+        // Login the student
+        window.AUTH.loginStudent(name);
+        
+        // Wait a bit before redirect
+        setTimeout(() => {
+            window.location.href = 'student-dashboard.html';
+        }, 300);
+        
+    } catch (error) {
+        alert('Login error: ' + error.message);
+        console.error('Full error:', error);
+    }
+}
+
+function loginAdmin(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('adminUsername').value.trim();
+    const password = document.getElementById('adminPassword').value;
+    
+    // Wait for AUTH to be available
+    if (typeof window.AUTH === 'undefined' || typeof window.SYMPHONY_CONFIG === 'undefined') {
+        alert('System is still loading. Please wait a moment and try again.');
+        setTimeout(() => location.reload(), 1000);
+        return;
+    }
+    
+    try {
+        const success = window.AUTH.loginAdmin(username, password);
+        
+        if (success) {
+            setTimeout(() => {
+                window.location.href = 'admin-dashboard.html';
+            }, 300);
+        } else {
+            alert('Invalid credentials!\n\nDefault login:\nUsername: admin\nPassword: admin123');
+        }
+    } catch (error) {
+        alert('Login error: ' + error.message);
+        console.error('Full error:', error);
+    }
+}
+
+// Ensure scripts are loaded
+window.addEventListener('load', function() {
+    console.log('Page loaded. AUTH available:', typeof window.AUTH !== 'undefined');
+    console.log('CONFIG available:', typeof window.SYMPHONY_CONFIG !== 'undefined');
+});
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
